@@ -253,7 +253,7 @@ namespace NumberGenerator.Test
             List<int> actualQuickTippNumbers = quickTippObserver.QuickTippNumbers;
 
             //Assert
-            CollectionAssert.AreEqual(new List<int>() { 1, 5, 23, 30, 33, 34 }, actualQuickTippNumbers.OrderBy(_=>_).ToArray());
+            CollectionAssert.AreEqual(new List<int>() { 1, 5, 23, 30, 33, 34 }, actualQuickTippNumbers.OrderBy(_ => _).ToArray());
         }
     }
 }

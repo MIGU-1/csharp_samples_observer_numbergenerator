@@ -4,7 +4,6 @@
     {
         void Attach(IObserver observer);
         void Detach(IObserver observer);
-
         void NotifyObservers(int number);
     }
 }
