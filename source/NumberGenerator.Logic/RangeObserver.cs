@@ -54,10 +54,12 @@ namespace NumberGenerator.Logic
 
         public override void OnNextNumber(int number)
         {
+            base.OnNextNumber(number);
+
             if (number >= LowerRange && number <= UpperRange)
                 NumbersInRange++;
 
-            if (NumbersInRange == NumbersOfHitsToWaitFor)
+            if (NumbersInRange >= NumbersOfHitsToWaitFor)
                 base.DetachFromNumberGenerator();
         }
 

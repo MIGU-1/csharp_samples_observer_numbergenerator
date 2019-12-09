@@ -28,9 +28,19 @@ namespace NumberGenerator.Logic
         {
             if (numberGenerator == null)
                 throw new ArgumentNullException(nameof(numberGenerator));
+            if (countOfNumbersToWaitFor <= 0)
+                throw new ArgumentException(nameof(countOfNumbersToWaitFor));
 
-            _numberGenerator = numberGenerator;
-            CountOfNumbersToWaitFor = countOfNumbersToWaitFor;
+            try
+            {
+                numberGenerator.Attach(this);
+                _numberGenerator = numberGenerator;
+                CountOfNumbersToWaitFor = countOfNumbersToWaitFor;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion
@@ -55,9 +65,7 @@ namespace NumberGenerator.Logic
                 Console.ResetColor();
                 DetachFromNumberGenerator();
             }
-
         }
-
 
         #endregion
 

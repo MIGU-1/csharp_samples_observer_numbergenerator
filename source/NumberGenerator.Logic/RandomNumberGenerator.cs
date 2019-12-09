@@ -78,6 +78,8 @@ namespace NumberGenerator.Logic
         {
             if (observer == null)
                 throw new ArgumentNullException(nameof(observer));
+            if (_observers.Contains(observer))
+                throw new InvalidOperationException(nameof(observer));
 
             _observers.Add(observer);
         }
@@ -90,9 +92,10 @@ namespace NumberGenerator.Logic
         {
             if (observer == null)
                 throw new ArgumentNullException(nameof(observer));
+            if (!_observers.Contains(observer))
+                throw new InvalidOperationException(nameof(observer));
 
-            if (_observers.Contains(observer))
-                _observers.Remove(observer);
+            _observers.Remove(observer);
         }
 
         /// <summary>
@@ -101,9 +104,9 @@ namespace NumberGenerator.Logic
         /// <param name="number">Die generierte Zahl.</param>
         public void NotifyObservers(int number)
         {
-            foreach (IObserver observer in _observers)
+            for (int i = 0; i < _observers.Count; i++)
             {
-                observer.OnNextNumber(number);
+                _observers[i].OnNextNumber(number);
             }
         }
 
@@ -120,11 +123,12 @@ namespace NumberGenerator.Logic
         /// </summary>
         public void StartNumberGeneration()
         {
+            Random random = new Random(Seed);
+
             while (_observers.Count > 0)
             {
-                Random random = new Random(Seed);
                 NotifyObservers(random.Next(RANDOM_MIN_VALUE, RANDOM_MAX_VALUE));
-                Task.Delay(DelayTime);
+                Task.Delay(DelayTime).Wait();
             }
         }
 
