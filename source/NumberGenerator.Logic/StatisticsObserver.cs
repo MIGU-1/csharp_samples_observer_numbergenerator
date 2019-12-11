@@ -27,12 +27,11 @@ namespace NumberGenerator.Logic
         /// Enthält die Summe der generierten Zahlen.
         /// </summary>
         public int Sum { get; private set; }
-        public int Count { get; set; }
 
         /// <summary>
         /// Enthält den Durchschnitt der generierten Zahlen.
         /// </summary>
-        public int Avg => Count > 0 ? Sum / Count : throw new DivideByZeroException(nameof(Count));
+        public int Avg => CountOfNumbersReceived > 0 ? Sum / CountOfNumbersReceived : throw new DivideByZeroException(nameof(CountOfNumbersReceived));
 
         #endregion
 
@@ -43,7 +42,6 @@ namespace NumberGenerator.Logic
             Min = int.MaxValue;
             Max = int.MinValue;
             Sum = 0;
-            Count = 0;
         }
 
         #endregion
@@ -52,20 +50,17 @@ namespace NumberGenerator.Logic
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"BaseObserver [CountOfNumbersReceived='{CountOfNumbersReceived}', CountOfNumbersToWaitFor='{CountOfNumbersToWaitFor}'] => StatisticsObserver [Min='{Min}', Max='{Max}', Sum='{Sum}', Avg='{Avg}']";
         }
         public override void OnNextNumber(int number)
         {
-            Count++;
+            base.OnNextNumber(number);
             Sum += number;
 
             if (number < Min)
                 Min = number;
             if (number > Max)
                 Max = number;
-
-            if (Count == CountOfNumbersToWaitFor)
-                base.DetachFromNumberGenerator();
         }
 
         #endregion

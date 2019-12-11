@@ -20,8 +20,10 @@ namespace NumberGenerator.Ui
 
             // Nummerngenerierung starten
             // Resultat ausgeben
-            throw new NotImplementedException();
 
+            numberGenerator.StartNumberGeneration();
+            Console.WriteLine(statisticsObserver.ToString());
+            Console.WriteLine(quickTippObserver.ToString());
         }
     }
 }

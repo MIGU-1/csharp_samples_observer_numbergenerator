@@ -71,7 +71,7 @@ namespace NumberGenerator.Logic
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"Observer: ";
         }
         protected void DetachFromNumberGenerator()
         {

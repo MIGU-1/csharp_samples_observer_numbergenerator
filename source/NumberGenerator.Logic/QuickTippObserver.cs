@@ -31,6 +31,7 @@ namespace NumberGenerator.Logic
 
             CountOfNumbersReceived = 0;
             QuickTippNumbers = new List<int>();
+            numberGenerator.Attach(this);
             _numberGenerator = numberGenerator;
         }
 
@@ -54,7 +55,7 @@ namespace NumberGenerator.Logic
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"{base.ToString()} = Quicktipp: | {QuickTippNumbers[0]} | {QuickTippNumbers[1]} | {QuickTippNumbers[2]} | {QuickTippNumbers[3]} | {QuickTippNumbers[4]} | {QuickTippNumbers[5]}";
         }
 
         private void DetachFromNumberGenerator()

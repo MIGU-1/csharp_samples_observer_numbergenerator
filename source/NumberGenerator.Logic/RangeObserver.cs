@@ -37,6 +37,9 @@ namespace NumberGenerator.Logic
 
         public RangeObserver(IObservable numberGenerator, int numberOfHitsToWaitFor, int lowerRange, int upperRange) : base(numberGenerator, int.MaxValue)
         {
+            if (lowerRange > upperRange)
+                throw new ArgumentException("Untergrenze > Obergrenze");
+
             NumbersInRange = 0;
             NumbersOfHitsToWaitFor = numberOfHitsToWaitFor;
             LowerRange = lowerRange;
@@ -49,7 +52,7 @@ namespace NumberGenerator.Logic
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"{base.ToString()} = {NumbersInRange}";
         }
 
         public override void OnNextNumber(int number)
