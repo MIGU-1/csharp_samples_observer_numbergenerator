@@ -7,22 +7,12 @@ namespace NumberGenerator.Logic
     /// <summary>
     /// Beobachter, welcher auf einen vollständigen Quick-Tipp wartet: 6 unterschiedliche Zahlen zw. 1 und 45.
     /// </summary>
-    public class QuickTippObserver : IObserver
+    public class QuickTippObserver
     {
-        #region Fields
-
         private IObservable _numberGenerator;
-
-        #endregion
-
-        #region Properties
 
         public List<int> QuickTippNumbers { get; private set; }
         public int CountOfNumbersReceived { get; private set; }
-
-        #endregion
-
-        #region Constructor
 
         public QuickTippObserver(IObservable numberGenerator)
         {
@@ -31,13 +21,10 @@ namespace NumberGenerator.Logic
 
             CountOfNumbersReceived = 0;
             QuickTippNumbers = new List<int>();
-            numberGenerator.Attach(this);
+
+            numberGenerator.NumberHandler += OnNextNumber;
             _numberGenerator = numberGenerator;
         }
-
-        #endregion
-
-        #region Methods
 
         public void OnNextNumber(int number)
         {
@@ -52,17 +39,13 @@ namespace NumberGenerator.Logic
                     DetachFromNumberGenerator();
             }
         }
-
+        private void DetachFromNumberGenerator()
+        {
+            _numberGenerator.NumberHandler -= OnNextNumber;
+        }
         public override string ToString()
         {
             return $"{base.ToString()} = Quicktipp: | {QuickTippNumbers[0]} | {QuickTippNumbers[1]} | {QuickTippNumbers[2]} | {QuickTippNumbers[3]} | {QuickTippNumbers[4]} | {QuickTippNumbers[5]}";
         }
-
-        private void DetachFromNumberGenerator()
-        {
-            _numberGenerator.Detach(this);
-        }
-
-        #endregion
     }
 }
