@@ -22,12 +22,14 @@ namespace NumberGenerator.Logic
             UpperRange = upperRange;
         }
 
-        public override void OnNextNumber(int number)
+        public override void OnNextNumber(object sender, int number)
         {
-            base.OnNextNumber(number);
+            base.OnNextNumber(sender, number);
 
             if (number >= LowerRange && number <= UpperRange)
                 NumbersInRange++;
+
+            Console.WriteLine(ToString());
 
             if (NumbersInRange >= NumbersOfHitsToWaitFor)
                 base.DetachFromNumberGenerator();

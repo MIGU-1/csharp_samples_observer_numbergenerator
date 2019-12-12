@@ -21,7 +21,8 @@ namespace NumberGenerator.Logic
 
         public int DelayTime { get; set; }
         public int Seed { get; set; }
-        public NextNumberHandler NumberHandler { get; set; }
+
+        public event EventHandler<int> NumberHandler;
 
         public RandomNumberGenerator() : this(DEFAULT_DELAY, DEFAULT_SEED)
         {
@@ -37,7 +38,8 @@ namespace NumberGenerator.Logic
 
         public void NotifyObservers(int number)
         {
-            NumberHandler?.Invoke(number);
+            Console.WriteLine($"New Number: {number}");
+            NumberHandler?.Invoke(this, number);
         }
         public void StartNumberGeneration()
         {

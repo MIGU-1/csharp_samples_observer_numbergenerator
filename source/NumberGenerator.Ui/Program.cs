@@ -9,7 +9,7 @@ namespace NumberGenerator.Ui
         static void Main()
         {
             // Zufallszahlengenerator erstelltn
-            RandomNumberGenerator numberGenerator = new RandomNumberGenerator(250);
+            RandomNumberGenerator numberGenerator = new RandomNumberGenerator(10);
 
             // Beobachter erstellen
             BaseObserver baseObserver = new BaseObserver(numberGenerator, 10);
@@ -22,8 +22,12 @@ namespace NumberGenerator.Ui
             // Resultat ausgeben
 
             numberGenerator.StartNumberGeneration();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine();
             Console.WriteLine(statisticsObserver.ToString());
             Console.WriteLine(quickTippObserver.ToString());
+            Console.ResetColor();
+            Console.ReadKey();
         }
     }
 }

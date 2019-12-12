@@ -26,7 +26,7 @@ namespace NumberGenerator.Logic
             _numberGenerator = numberGenerator;
         }
 
-        public void OnNextNumber(int number)
+        public void OnNextNumber(object sender, int number)
         {
             CountOfNumbersReceived++;
 

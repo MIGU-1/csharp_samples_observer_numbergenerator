@@ -33,7 +33,7 @@ namespace NumberGenerator.Logic
             }
         }
 
-        public virtual void OnNextNumber(int number)
+        public virtual void OnNextNumber(object sender, int number)
         {
             CountOfNumbersReceived++;
 
